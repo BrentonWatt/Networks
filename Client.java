@@ -150,7 +150,7 @@ public class Client
                 try
                 {
                     String mess = (String) iStream.readObject();
-                    System.out.println(mess);
+                    System.out.print(mess);
                     System.out.print("COS332 Chat:>");
                 }
                 catch(IOException ie)

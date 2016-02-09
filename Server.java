@@ -71,7 +71,7 @@ public class Server
     protected synchronized void broadcast(String mess)
     {
         String time = sdf.format(new Date());
-        String fMess = time + " " + mess + "\n";
+        String fMess = "\n" + time + " " + mess + "\n";
         System.out.print(fMess);
         for (int i = 0; i < clients.size(); i++)
         {

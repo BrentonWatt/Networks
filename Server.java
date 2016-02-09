@@ -5,7 +5,6 @@
 import java.util.*;
 import java.io.*;
 import java.net.*;
-import java.lang.*;
 import java.text.SimpleDateFormat;
 
 public class Server
@@ -13,7 +12,7 @@ public class Server
     protected ArrayList<ClientThread> clients;
     private SimpleDateFormat sdf;
     private int port;
-    private boolean unfinished;
+    private boolean running;
 
     public Server(int port)
     {
@@ -24,19 +23,19 @@ public class Server
 
     public void start()
     {
-        unfinished = true;
+        running = true;
         try
         {
             ServerSocket ss = new ServerSocket(port);
-            while (unfinished)
+            while (running)
             {
                 System.out.println("Waiting for clients");
                 Socket sock = ss.accept();
-                if (!unfinished)
+                if (!running)
                 {
                     break;
                 }
-                ClientThread t = new ClientThread(sock);
+                ClientThread t = new ClientThread(sock, this);
                 clients.add(t);
                 t.start();
             }
@@ -74,12 +73,13 @@ public class Server
         String time = sdf.format(new Date());
         String fMess = time + " " + mess + "\n";
         System.out.print(fMess);
-        for (int i = clients.size(); --i >= 0;)
+        for (int i = 0; i < clients.size(); i++)
         {
             ClientThread ct = clients.get(i);
             if (!ct.writeMessage(fMess))
             {
-                clients.remove(i);
+                clients.remove(ct.id);
+                i--;
                 System.out.println("Removed client " + ct.uName);
             }
         }
@@ -87,15 +87,12 @@ public class Server
 
     synchronized void remove(int id)
     {
-        for (int i = 0; i < clients.size(); i++)
-        {
-            ClientThread ct = clients.get(id);
-            if (ct.id == id)
-            {
-                clients.remove(id);
-                return;
+        for (int i = 0; i < clients.size(); i++) {
+            if(id == clients.get(i).id){
+                clients.remove(i);
             }
         }
+        
     }
 
 

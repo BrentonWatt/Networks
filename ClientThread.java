@@ -14,12 +14,13 @@ public class ClientThread extends Thread
     String uName;
     ChatMessage cm;
     String date;
-    Server s = new Server(5555);
+    Server server;
 
-    ClientThread(Socket sock)
+    ClientThread(Socket s, Server ss)
     {
         id++;
-        this.sock = sock;
+        sock = s;
+        server = ss;
         try
         {
             oStream = new ObjectOutputStream(sock.getOutputStream());
@@ -63,16 +64,16 @@ public class ClientThread extends Thread
             if(type == ChatMessage.connected)
             {
                 System.out.println("List of connected users: \n");
-                for (int i = 0; i < s.clients.size(); ++i)
+                for (int i = 0; i < server.clients.size(); ++i)
                 {
-                    ClientThread c = s.clients.get(i);
+                    ClientThread c = server.clients.get(i);
                     writeMessage(c.uName);
                 }
             }
 
             else if(type == ChatMessage.message)
             {
-                s.broadcast(uName + ": " + mess);
+                server.broadcast(uName + ": " + mess);
             }
 
             else if(type == ChatMessage.logout)
@@ -83,7 +84,7 @@ public class ClientThread extends Thread
             }
 
         }
-        s.remove(id);
+        server.remove(id);
         close();
     }
 

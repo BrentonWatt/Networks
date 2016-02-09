@@ -4,6 +4,7 @@
 import java.io.*;
 import java.net.*;
 import java.util.*;
+import javax.swing.JOptionPane;
 
 
 public class Client
@@ -111,8 +112,9 @@ public class Client
     }
 
     public static void main(String[] args) throws Exception
+            
     {
-        Client client = new Client("localhost", 5555, "Brent");
+        Client client = new Client("localhost", 5555, JOptionPane.showInputDialog("Name"));
         if(!client.start())
         {
             return;

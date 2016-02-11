@@ -240,7 +240,10 @@ public class ClientPanel extends javax.swing.JFrame {
 
     private void txfInputKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfInputKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-             btnSend.doClick();
+            btnSend.doClick();
+            txfInput.setText("");
+            txfInput.setFont(new java.awt.Font("Ubuntu", 0, 15));
+            txfInput.setForeground(new java.awt.Color(0, 0, 0));
         }
     }//GEN-LAST:event_txfInputKeyPressed
 

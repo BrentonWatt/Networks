@@ -1,4 +1,5 @@
 
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -157,6 +158,11 @@ public class ClientPanel extends javax.swing.JFrame {
                 txfInputActionPerformed(evt);
             }
         });
+        txfInput.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txfInputKeyPressed(evt);
+            }
+        });
 
         btnSend.setFont(new java.awt.Font("Ubuntu", 0, 15)); // NOI18N
         btnSend.setText("Send");
@@ -231,6 +237,12 @@ public class ClientPanel extends javax.swing.JFrame {
         txfInput.setText("Type a Message");            
         
     }//GEN-LAST:event_btnSendActionPerformed
+
+    private void txfInputKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfInputKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+             btnSend.doClick();
+        }
+    }//GEN-LAST:event_txfInputKeyPressed
 
     /**
      * @param args the command line arguments

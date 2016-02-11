@@ -67,7 +67,7 @@ public class ClientThread extends Thread
                 for (int i = 0; i < server.clients.size(); ++i)
                 {
                     ClientThread c = server.clients.get(i);
-                    writeMessage(c.uName+"/n");
+                    writeMessage(c.uName);
                 }
             }
 

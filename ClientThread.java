@@ -67,13 +67,13 @@ public class ClientThread extends Thread
                 for (int i = 0; i < server.clients.size(); ++i)
                 {
                     ClientThread c = server.clients.get(i);
-                    writeMessage(c.uName);
+                    writeMessage(c.uName+"/n");
                 }
             }
 
             else if(type == ChatMessage.message)
             {
-                server.broadcast(uName + ": " + mess);
+                server.broadcast(uName ,mess);
             }
 
             else if(type == ChatMessage.logout)

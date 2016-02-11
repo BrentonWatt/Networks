@@ -114,7 +114,7 @@ public class Client
     public static void main(String[] args) throws Exception
             
     {
-        Client client = new Client("localhost", 5555, JOptionPane.showInputDialog("Name"));
+        Client client = new Client(JOptionPane.showInputDialog("IP"), 5555, JOptionPane.showInputDialog("Name"));
         if(!client.start())
         {
             return;

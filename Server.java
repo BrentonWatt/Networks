@@ -68,20 +68,21 @@ public class Server
         }
     }
 
-    protected synchronized void broadcast(String mess)
+    protected synchronized void broadcast(String user, String mess)
     {
         String time = sdf.format(new Date());
-        String fMess = "\n" + time + " " + mess + "\n";
+        String fMess = time + " " + user + ": " + mess;
         System.out.print(fMess);
         for (int i = 0; i < clients.size(); i++)
         {
             ClientThread ct = clients.get(i);
+            
             if (!ct.writeMessage(fMess))
             {
                 clients.remove(ct.id);
                 i--;
                 System.out.println("Removed client " + ct.uName);
-            }
+            }                
         }
     }
 
